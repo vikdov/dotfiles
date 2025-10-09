@@ -39,3 +39,4 @@ sudo pacman -S discord
 yay -S cliphist mako
 sudo pacman -S sof-firmware
 sudo pacman -S zathura zathura-pdf-poppler sdoom
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)"
