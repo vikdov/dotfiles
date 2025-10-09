@@ -27,6 +27,6 @@ useradd -m -G wheel -s /bin/bash viktor
 passwd "my password"
 EDITOR=nvim visudo
 uncomment # %wheel ALL=(ALL:ALL) ALL
-pacman s hyprland kitty
+pacman s hyprland kitty zsh obsidian
 sudo pacman -S hyprland xorg-xwayland kitty ttf-fira-code swaybg swayidle pipewire pipewire-pulse wireplumber wl-clipboard
 pacman -S neovim tmux git sudo base-devel networkmanager pipewire pipewire-pulse firefox
