@@ -30,3 +30,10 @@ uncomment # %wheel ALL=(ALL:ALL) ALL
 pacman s hyprland kitty zsh obsidian
 sudo pacman -S hyprland xorg-xwayland kitty ttf-fira-code swaybg swayidle pipewire pipewire-pulse wireplumber wl-clipboard
 pacman -S neovim tmux git sudo base-devel networkmanager pipewire pipewire-pulse firefox
+sudo pacman -S git curl wget unzip zip
+git config --global user.name "vikdov"
+git config --global user.email "mr.dovgoshiya@gmail.com"
+sudo pacman -S python python-pip nodejs npm docker docker-compose neovim
+sudo pacman -S waybar hyprpaper hyprshot
+sudo pacman -S discord    
+yay -S cliphist
