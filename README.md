@@ -36,4 +36,6 @@ git config --global user.email "mr.dovgoshiya@gmail.com"
 sudo pacman -S python python-pip nodejs npm docker docker-compose neovim
 sudo pacman -S waybar hyprpaper hyprshot
 sudo pacman -S discord    
-yay -S cliphist
+yay -S cliphist mako
+sudo pacman -S sof-firmware
+sudo pacman -S zathura zathura-pdf-poppler sdoom
