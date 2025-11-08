@@ -1,0 +1,9 @@
+# yazi.toml
+[mgr]
+show_hidden = true
+start_dir = "$HOME"
+view_mode = "list"
+[opener]
+edit = [
+	{ run = 'nvim "$@"', block = true, for = "unix" },
+]

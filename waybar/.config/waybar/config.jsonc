@@ -1,0 +1,145 @@
+// -*- mode: jsonc -*-
+{
+  "height": 30,
+  "spacing": 8,
+  "modules-left": [
+    "custom/arch",
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [],
+  "modules-right": [
+    "bluetooth",
+    "pulseaudio",
+    "temperature",
+    "cpu",
+    "memory",
+    "network",
+    "battery",
+    "power-profiles-daemon",
+    "clock",
+    "custom/power"
+  ],
+  "hyprland/workspaces": {
+    "format": "{id}",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1"
+  },
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 50,
+    "separate-outputs": false
+  },
+  "cpu": {
+    "interval": 3,
+    "format": " {usage}%",
+    "max-length": 10
+  },
+  "network": {
+    "interface": "wlo1",
+    "format-wifi": "{ipaddr}",
+    "format-alt": " {essid:2} ({signalStrength}%) ",
+    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+    "format-disconnected": "󰌙 Disconnected",
+    "tooltip-format-wifi": "<b>Network Info</b>\n{essid}\nSignal: {signalStrength}% | {signaldBm} dBm\nFrequency: {frequency} GHz\n\n<b>Connection</b>\nInterface: {ifname}\nIP: {ipaddr}\nGateway: {gwaddr}\nNetmask: {netmask}\nCIDR: {cidr}\n\n<b>Speed</b>\nUp: {bandwidthUpBytes} \nDown: {bandwidthDownBytes} \nTotal: {bandwidthTotalBytes}",
+    "tooltip-format-ethernet": "<b>Wired Connection</b>\nInterface: {ifname}\nIP: {ipaddr}\nGateway: {gwaddr}\nNetmask: {netmask}\nCIDR: {cidr}\n\n<b>Speed</b>\nUp: {bandwidthUpBytes} \nDown: {bandwidthDownBytes} \nTotal: {bandwidthTotalBytes} ",
+    "tooltip-format-disconnected": "󰌙Disconnected",
+    "on-click": "mode",
+    "on-click-right": "kitty -e nmtui",
+    "max-length": 50
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "󰔏 {temperatureC}°C",
+    "tooltip": true,
+    "tooltip-format": "CPU Temperature: {temperatureC}°C\nCritical: 80°C"
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {used:0.1f}G/{total:0.1f}G",
+    "format-alt": " {percentage}%"
+  },
+  "battery": {
+    "bat": "BAT1",
+    "interval": 60,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}", // On battery
+    "format-charging": "⚡ {capacity}%", // Charging
+    "format-plugged": " {capacity}%", // Plugged but not charging
+    "format-full": " {capacity}%", // Full + plugged
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "max-length": 25,
+    "tooltip": true,
+    "tooltip-format": "Battery: {capacity}%"
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    }
+  },
+  "bluetooth": {
+    "format": "{icon}",
+    "format-connected": "{icon} {num_connections}",
+    "format-alt": "{alias}",
+    "tooltip-format": "Bluetooth: Off",
+    "tooltip-format-connected": "{controller_alias}\n\nConnected Devices:\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "on-click": "",
+    "on-click-right": "blueman-manager &",
+    "format-icons": {
+      "enabled": "󰂯",
+      "disabled": "󰂲"
+    }
+  },
+  "clock": {
+    "format": "{:%H:%M}",
+    "format-alt": "{:%Y-%m-%d}",
+    "on-click": "mode",
+    "tooltip": true,
+    "tooltip-format": "<tt><small>{calendar}</small></tt>"
+  },
+  "pulseaudio": {
+    "format": "{icon}{volume}%",
+    "format-muted": "󰝟",
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+    "on-click-right": "pavucontrol",
+    "format-icons": [
+      "󰕿",
+      "󰖀",
+      "󰕾"
+    ]
+  },
+  "custom/power": {
+    "format": "⏻",
+    "tooltip": true,
+    "tooltip-format": "Left: Shutdown\nMiddle: Reboot\nRight: Suspend",
+    "on-click": "systemctl poweroff",
+    "on-click-middle": "systemctl reboot",
+    "on-click-right": "systemctl suspend"
+  },
+  "custom/arch": {
+    "format": "<span color='#1793d1'></span>",
+    "tooltip": true,
+    "tooltip-format": "Arch Linux — Hyprland ⛰️",
+    "on-click": "kitty -e sh -c 'btop; exec bash'",
+    "on-click-right": "kitty -e sh -c 'fastfetch; exec bash'",
+    "on-click-middle": "kitty -e yazi",
+    "on-scroll-up": "kitty -e cava"
+  }
+}
