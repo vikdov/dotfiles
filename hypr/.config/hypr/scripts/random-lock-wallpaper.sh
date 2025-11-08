@@ -1,21 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-WALLPAPER_DIR="$HOME/.config/backgrounds"
-LOCK_IMAGE="/tmp/lock_wallpaper"
-FALLBACK="$HOME/.config/backgrounds/a_city_skyline_with_a_tall_building.jpg"
+DIR="$(realpath ~/.config/backgrounds)"
+IMG="$(find "$DIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" \) -print0 |
+  shuf -z -n1 | tr -d '\0')"
 
-# Pick random image
-FILE=$(find "$WALLPAPER_DIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" \) | shuf -n 1)
-
-# Fallback
-[[ -z "$FILE" || ! -f "$FILE" ]] && FILE="$FALLBACK"
-
-# Fast copy (no processing)
-cp "$FILE" "$LOCK_IMAGE"
-
-# Ensure readable
-chmod 644 "$LOCK_IMAGE"
-
-# Optional: silent notification
-# notify-send -u low "Lock WP" "$(basename "$FILE")" -t 1000
+rm -f /tmp/lock_wallpaper.jpg
+if command -v magick >/dev/null 2>&1; then
+  magick "$IMG" -strip -background black -flatten -quality 95 /tmp/lock_wallpaper.jpg
+else
+  convert "$IMG" -strip -background black -flatten -quality 95 /tmp/lock_wallpaper.jpg 2>/dev/null || cp -f "$IMG" /tmp/lock_wallpaper.jpg
+fi
