@@ -90,6 +90,7 @@ alias n='nvim'
 alias c='clear'
 alias y='yazi'
 alias ls='ls --color=auto --hyperlink=auto'
+alias lg='lazygit'
 
 # Shell integrations
 eval "$(fzf --zsh)"

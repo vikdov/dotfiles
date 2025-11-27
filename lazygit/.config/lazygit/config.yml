@@ -1,0 +1,3 @@
+os:
+  openCommand: kitty --single-instance nvim {{filename}}
+  openLinkCommand: xdg-open {{link}}

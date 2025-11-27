@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<submenu></submenu>
+	<unique-id>1764096515874963-1</unique-id>
+	<command>kitty --working-directory=%f</command>
+	<description>Example for a custom action</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon></icon>
+	<name>Unzip Here</name>
+	<submenu></submenu>
+	<unique-id>1764163593749716-1</unique-id>
+	<command>bash -c &apos;unzip &quot;%f&quot; -d &quot;$(basename -s .zip &quot;%f&quot;)&quot;&apos;</command>
+	<description>Extract contents of a ZIP file to a new folder</description>
+	<range>*</range>
+	<patterns>*.zip</patterns>
+	<startup-notify/>
+	<other-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>Create ZIP Archive</name>
+	<submenu></submenu>
+	<unique-id>1764164671360890-2</unique-id>
+	<command>bash -c &apos;zip -r &quot;%n.zip&quot; &quot;%f&quot;&apos;</command>
+	<description>Zips selected files/folders to a new archive</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<other-files/>
+</action>
+</actions>

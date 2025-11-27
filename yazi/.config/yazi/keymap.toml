@@ -1,0 +1,5 @@
+# ~/.config/yazi/keymap.toml
+[mgr]
+prepend_keymap = [
+    { on = ["<C-t>"], run = '''shell --orphan "kitty --directory='$PWD'"''', desc = "Open kitty here (alongside)" },
+]
