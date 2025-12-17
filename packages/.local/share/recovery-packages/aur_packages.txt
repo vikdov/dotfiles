@@ -1,0 +1,3 @@
+spicetify-cli
+spotify
+yay
