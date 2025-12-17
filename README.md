@@ -22,7 +22,7 @@ Before getting started, make sure you have:
 git clone https://github.com/vikdov/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
-
+or make install script executable chmod +x install.sh and then run it ./install.sh
 2. Use Stow to create symlinks for the packages you want to install:
 
 ```bash
