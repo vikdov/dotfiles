@@ -113,6 +113,7 @@ stow -D packagename
 - Be careful when using `--adopt` as it will move existing files into the dotfiles directory
 - Always back up your current configurations before stowing packages
 - Test stow commands with `--simulate` flag first to see what changes will be made
+- chsh -s $(which zsh)  to switch shell to zsh
 
 ## License
 
