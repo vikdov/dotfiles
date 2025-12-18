@@ -106,17 +106,32 @@ for dir in */; do
   fi
 done
 
-sudo tee /etc/keyd/default.conf << 'EOF'
-[ids]
+# 7. Configure keyd (Caps Lock: overload as Control when held, Esc when tapped; Esc becomes Caps Lock)
+log_info "Configuring keyd..."
+if ! command -v keyd &>/dev/null; then
+  log_error "keyd is not installed. Ensure it's in your package lists."
+  exit 1
+fi
 
+sudo mkdir -p /etc/keyd
+sudo tee /etc/keyd/default.conf >/dev/null <<'EOF'
+[ids]
 *
 
 [main]
-
 capslock = overload(control, esc)
 esc = capslock
 EOF
-sudo systemctl enable --now keyd
+
+if sudo systemctl enable --now keyd; then
+  log_info "keyd service enabled and started."
+fi
+
+if sudo keyd reload; then
+  log_info "keyd configuration reloaded successfully."
+else
+  log_warn "Failed to reload keyd (may already be active with new config)."
+fi
 
 echo
 echo "=== Setup complete! ==="
