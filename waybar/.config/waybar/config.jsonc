@@ -36,7 +36,6 @@
     "max-length": 10
   },
   "network": {
-    "interface": "wlo1",
     "format-wifi": "{ipaddr}",
     "format-alt": " {essid:2} ({signalStrength}%) ",
     "format-ethernet": "{ipaddr}/{cidr} 󰊗",
@@ -49,6 +48,7 @@
     "max-length": 50
   },
   "temperature": {
+    "hwmon-path": "/sys/class/hwmon/hwmon1/temp5_input",
     "critical-threshold": 80,
     "format": "󰔏 {temperatureC}°C",
     "tooltip": true,
