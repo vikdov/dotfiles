@@ -106,6 +106,18 @@ for dir in */; do
   fi
 done
 
+sudo tee /etc/keyd/default.conf << 'EOF'
+[ids]
+
+*
+
+[main]
+
+capslock = overload(control, esc)
+esc = capslock
+EOF
+sudo systemctl enable --now keyd
+
 echo
 echo "=== Setup complete! ==="
 if [ $stow_failures -eq 0 ]; then
