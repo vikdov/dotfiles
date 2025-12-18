@@ -52,10 +52,17 @@ zinit cdreplay -q
 # Keybindings
 bindkey -v
 bindkey '^j' autosuggest-accept
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
+bindkey '^l' forward-word
+bindkey '^k' autosuggest-execute
+bindkey '^H' backward-kill-word
+bindkey '^n' history-search-backward
+bindkey '^p' history-search-forward
 bindkey '^[w' kill-region
 zstyle ':fzf-tab:*' fzf-bindings 'ctrl-f:accept'
+export KEYTIMEOUT=1
+
+bindkey '^[[1;5C' forward-word       # Ctrl + Right Arrow
+bindkey '^[[1;5D' backward-word      # Ctrl + Left Arrow
 
 # History
 HISTSIZE=5000
