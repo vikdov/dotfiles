@@ -4,4 +4,6 @@
 [init]
 	defaultBranch = main
 [core]
-	editor = nvim
+  editor = nvim
+[alias]
+    clones = clone --recurse-submodules
