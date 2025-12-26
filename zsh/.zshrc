@@ -54,11 +54,12 @@ bindkey -v
 bindkey '^j' autosuggest-accept
 bindkey '^l' forward-word
 bindkey '^k' autosuggest-execute
-bindkey '^H' backward-kill-word
+bindkey '^h' backward-kill-word
+bindkey '^j' backward-word
 bindkey '^n' history-search-backward
 bindkey '^p' history-search-forward
 bindkey '^[w' kill-region
-zstyle ':fzf-tab:*' fzf-bindings 'ctrl-f:accept'
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-l:accept'
 export KEYTIMEOUT=1
 
 bindkey '^[[1;5C' forward-word       # Ctrl + Right Arrow
