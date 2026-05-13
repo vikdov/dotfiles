@@ -25,7 +25,7 @@ for dir in */; do
     rel="${file#"$dir"/}"
     target="$HOME/$rel"
     expected="$DOTFILES_DIR/$file"
-    if [[ ! -L "$target" ]] || [[ "$(readlink -f "$target")" != "$(readlink -f "$expected")" ]]; then
+    if [[ ! -e "$target" ]] || [[ "$(readlink -f "$target")" != "$(readlink -f "$expected")" ]]; then
       pkg_issues=$((pkg_issues + 1))
     fi
   done < <(find "$dir" -type f)
@@ -45,6 +45,7 @@ mapfile -t broken < <(find "$HOME" -maxdepth 4 -xtype l 2>/dev/null \
   | grep -v "/node_modules" \
   | grep -v "/.cargo" \
   | grep -v "/.rustup" \
+  | grep -v "/.cache" \
   || true)
 
 if [[ ${#broken[@]} -eq 0 ]]; then
