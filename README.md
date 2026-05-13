@@ -58,8 +58,8 @@ stow */
 Or to install specific packages:
 
 ```bash
-stow bash
 stow nvim
+stow zsh
 stow git
 ```
 
@@ -75,10 +75,9 @@ The repository is organized into packages, each representing a different applica
 
 ```
 dotfiles/
-├── bash/              # Bash configuration
 ├── nvim/              # Neovim configuration
 ├── zsh/               # Zsh configuration
-├── hyprland/          # Hyprland window manager
+├── hypr/              # Hyprland window manager
 ├── packages/          # Package lists and recovery data
 │   └── .local/share/recovery-packages/
 │       ├── pacman_packages.txt    # Official repository packages

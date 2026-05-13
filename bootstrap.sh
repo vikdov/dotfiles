@@ -77,12 +77,17 @@ fi
 
 if [ -f "$AUR_LIST" ]; then
   log_info "Installing AUR packages..."
-  yay -S --needed --noconfirm -y - <"$AUR_LIST" || {
+  yay -S --needed --noconfirm - <"$AUR_LIST" || {
     log_warn "Some AUR packages failed to install"
   }
 else
   log_warn "AUR package list not found: $AUR_LIST"
 fi
+
+# 5.5. Rebuild font cache
+log_info "Rebuilding font cache..."
+fc-cache -fv &>/dev/null
+log_info "Font cache rebuilt."
 
 # 6. Stow dotfiles (only top-level directories that are stow packages)
 log_info "Stowing dotfiles..."
@@ -106,11 +111,23 @@ for dir in */; do
   fi
 done
 
+# 6.5. Set zsh as default shell
+if [ "$(basename "$SHELL")" != "zsh" ]; then
+  if command -v zsh &>/dev/null; then
+    log_info "Setting zsh as default shell..."
+    chsh -s "$(which zsh)"
+  else
+    log_warn "zsh not found, skipping shell change"
+  fi
+else
+  log_info "zsh already default shell."
+fi
+
 # 7. Configure keyd (Caps Lock: overload as Control when held, Esc when tapped; Esc becomes Caps Lock)
 log_info "Configuring keyd..."
 if ! command -v keyd &>/dev/null; then
-  log_error "keyd is not installed. Ensure it's in your package lists."
-  exit 1
+  log_info "keyd not found, installing..."
+  sudo pacman -S --needed --noconfirm keyd
 fi
 
 sudo mkdir -p /etc/keyd
@@ -131,6 +148,12 @@ if sudo keyd reload; then
   log_info "keyd configuration reloaded successfully."
 else
   log_warn "Failed to reload keyd (may already be active with new config)."
+fi
+
+# 8. Enable common services
+if systemctl list-unit-files bluetooth.service &>/dev/null; then
+  sudo systemctl enable --now bluetooth
+  log_info "Bluetooth service enabled."
 fi
 
 echo
