@@ -5,12 +5,14 @@
   "modules-left": [
     "custom/arch",
     "hyprland/workspaces",
-    "hyprland/window"
+    "hyprland/window",
+    "tray"
   ],
   "modules-center": [],
   "modules-right": [
     "bluetooth",
     "pulseaudio",
+    //"backlight",
     "temperature",
     "cpu",
     "memory",
@@ -20,6 +22,28 @@
     "clock",
     "custom/power"
   ],
+  "tray": {
+    "spacing": 6,
+    "icon-size": 16
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-",
+    "smooth-scrolling-threshold": 1
+  },
   "hyprland/workspaces": {
     "format": "{id}",
     "on-scroll-up": "hyprctl dispatch workspace e+1",
@@ -28,20 +52,22 @@
   "hyprland/window": {
     "format": "{}",
     "max-length": 50,
-    "separate-outputs": false
+    "separate-outputs": true
   },
   "cpu": {
     "interval": 3,
     "format": " {usage}%",
+    "format-alt": " {avg_frequency:.1f}GHz",
+    "on-click": "mode",
     "max-length": 10
   },
   "network": {
     "format-wifi": "{ipaddr}",
-    "format-alt": " {essid:2} ({signalStrength}%) ",
+    "format-alt": "  {essid:2} ({signalStrength}%)",
     "format-ethernet": "{ipaddr}/{cidr} 󰊗",
     "format-disconnected": "󰌙 Disconnected",
     "tooltip-format-wifi": "<b>Network Info</b>\n{essid}\nSignal: {signalStrength}% | {signaldBm} dBm\nFrequency: {frequency} GHz\n\n<b>Connection</b>\nInterface: {ifname}\nIP: {ipaddr}\nGateway: {gwaddr}\nNetmask: {netmask}\nCIDR: {cidr}\n\n<b>Speed</b>\nUp: {bandwidthUpBytes} \nDown: {bandwidthDownBytes} \nTotal: {bandwidthTotalBytes}",
-    "tooltip-format-ethernet": "<b>Wired Connection</b>\nInterface: {ifname}\nIP: {ipaddr}\nGateway: {gwaddr}\nNetmask: {netmask}\nCIDR: {cidr}\n\n<b>Speed</b>\nUp: {bandwidthUpBytes} \nDown: {bandwidthDownBytes} \nTotal: {bandwidthTotalBytes} ",
+    "tooltip-format-ethernet": "<b>Wired Connection</b>\nInterface: {ifname}\nIP: {ipaddr}\nGateway: {gwaddr}\nNetmask: {netmask}\nCIDR: {cidr}\n\n<b>Speed</b>\nUp: {bandwidthUpBytes} \nDown: {bandwidthDownBytes} \nTotal: {bandwidthTotalBytes}",
     "tooltip-format-disconnected": "󰌙Disconnected",
     "on-click": "mode",
     "on-click-right": "kitty -e nmtui",
@@ -69,7 +95,7 @@
     "format": "{capacity}% {icon}", // On battery
     "format-charging": "⚡ {capacity}%", // Charging
     "format-plugged": " {capacity}%", // Plugged but not charging
-    "format-full": " {capacity}%", // Full + plugged
+    "format-full": "", // Full + plugged
     "format-icons": [
       "",
       "",
@@ -95,11 +121,10 @@
     "format": "{icon}",
     "format-connected": "{icon} {num_connections}",
     "format-alt": "{alias}",
-    "tooltip-format": "Bluetooth: Off",
+    "tooltip-format": "Bluetooth: {status}",
     "tooltip-format-connected": "{controller_alias}\n\nConnected Devices:\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
-    "on-click": "",
-    "on-click-right": "blueman-manager &",
+    "on-click": "blueman-manager &",
     "format-icons": {
       "enabled": "󰂯",
       "disabled": "󰂲"
@@ -110,7 +135,18 @@
     "format-alt": "{:%Y-%m-%d}",
     "on-click": "mode",
     "tooltip": true,
-    "tooltip-format": "<tt><small>{calendar}</small></tt>"
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#cdd6f4'><b>{}</b></span>",
+        "days": "<span color='#cdd6f4'>{}</span>",
+        "weeks": "<span color='#99d1db'><b>W{}</b></span>",
+        "weekdays": "<span color='#e5c890'><b>{}</b></span>",
+        "today": "<span color='#a6e3a1'><b><u>{}</u></b></span>"
+      }
+    }
   },
   "pulseaudio": {
     "format": "{icon}{volume}%",
@@ -128,9 +164,9 @@
   "custom/power": {
     "format": "⏻",
     "tooltip": true,
-    "tooltip-format": "Left: Shutdown\nMiddle: Reboot\nRight: Suspend",
-    "on-click": "systemctl poweroff",
-    "on-click-middle": "systemctl reboot",
+    "tooltip-format": "Left: Shutdown (confirm)\nMiddle: Reboot (confirm)\nRight: Suspend",
+    "on-click": "wofi --dmenu --prompt 'Shutdown?' --width 200 --height 115 --lines 2 <<< $'Yes\\nNo' | grep -q Yes && systemctl poweroff",
+    "on-click-middle": "wofi --dmenu --prompt 'Reboot?' --width 200 --height 115 --lines 2 <<< $'Yes\\nNo' | grep -q Yes && systemctl reboot",
     "on-click-right": "systemctl suspend"
   },
   "custom/arch": {

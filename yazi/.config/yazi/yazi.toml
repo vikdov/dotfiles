@@ -1,4 +1,14 @@
 # yazi.toml
+[[plugin.prepend_fetchers]]
+url   = "*"
+run   = "git"
+group = "git"
+
+[[plugin.prepend_fetchers]]
+url   = "*/"
+run   = "git"
+group = "git"
+
 [mgr]
 show_hidden = true
 start_dir = "$HOME"
@@ -6,4 +16,24 @@ view_mode = "list"
 [opener]
 edit = [
 	{ run = 'nvim "$@"', block = true, for = "unix" },
+]
+open = [
+	{ run = 'xdg-open "$@"', desc = "Open", for = "unix" },
+]
+play = [
+	{ run = 'mpv "$@"', orphan = true, for = "unix" },
+]
+pdf = [
+	{ run = 'zathura "$@"', orphan = true, for = "unix" },
+]
+
+[open]
+rules = [
+	{ mime = "application/pdf", use = "pdf" },
+	{ mime = "{audio,video}/*", use = "play" },
+	{ mime = "image/*", use = "open" },
+	{ mime = "inode/x-empty", use = "edit" },
+	{ mime = "application/{zip,x-tar,x-bzip*,x-7z-compressed,x-rar,gzip,zstd}", use = "open" },
+	{ mime = "application/x-{executable,sharedlib}", use = "open" },
+	{ mime = "*", use = "edit" },
 ]

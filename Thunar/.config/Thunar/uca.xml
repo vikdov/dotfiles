@@ -6,7 +6,7 @@
 	<submenu></submenu>
 	<unique-id>1764096515874963-1</unique-id>
 	<command>kitty --working-directory=%f</command>
-	<description>Example for a custom action</description>
+	<description>Open kitty in selected directory</description>
 	<range></range>
 	<patterns>*</patterns>
 	<startup-notify/>
@@ -17,8 +17,8 @@
 	<name>Unzip Here</name>
 	<submenu></submenu>
 	<unique-id>1764163593749716-1</unique-id>
-	<command>bash -c &apos;unzip &quot;%f&quot; -d &quot;$(basename -s .zip &quot;%f&quot;)&quot;&apos;</command>
-	<description>Extract contents of a ZIP file to a new folder</description>
+	<command>bash -c &apos;cd &quot;$(dirname &quot;%f&quot;)&quot; &amp;&amp; unzip &quot;%f&quot; -d &quot;$(basename -s .zip &quot;%f&quot;)&quot;&apos;</command>
+	<description>Extract ZIP to subfolder in same directory</description>
 	<range>*</range>
 	<patterns>*.zip</patterns>
 	<startup-notify/>
@@ -29,11 +29,35 @@
 	<name>Create ZIP Archive</name>
 	<submenu></submenu>
 	<unique-id>1764164671360890-2</unique-id>
-	<command>bash -c &apos;zip -r &quot;%n.zip&quot; &quot;%f&quot;&apos;</command>
-	<description>Zips selected files/folders to a new archive</description>
+	<command>bash -c &apos;cd &quot;$(dirname &quot;%f&quot;)&quot; &amp;&amp; zip -r &quot;%n.zip&quot; &quot;%n&quot;&apos;</command>
+	<description>Zip selected file/folder in same directory</description>
 	<range>*</range>
 	<patterns>*</patterns>
 	<directories/>
 	<other-files/>
+</action>
+<action>
+	<icon>edit-copy</icon>
+	<name>Copy Path</name>
+	<submenu></submenu>
+	<unique-id>1764096515874963-2</unique-id>
+	<command>bash -c &apos;echo -n &quot;%f&quot; | wl-copy&apos;</command>
+	<description>Copy full path to clipboard</description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+	<other-files/>
+</action>
+<action>
+	<icon>system-file-manager</icon>
+	<name>Open in Yazi</name>
+	<submenu></submenu>
+	<unique-id>1764096515874963-3</unique-id>
+	<command>kitty -- yazi %f</command>
+	<description>Open selected directory in yazi</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
 </action>
 </actions>

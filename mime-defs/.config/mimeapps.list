@@ -1,6 +1,31 @@
 [Default Applications]
 application/pdf=org.pwmt.zathura.desktop
 text/plain=nvim.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
+image/png=vimiv.desktop
+image/jpeg=vimiv.desktop
+image/gif=vimiv.desktop
+image/webp=vimiv.desktop
+image/tiff=vimiv.desktop
+image/bmp=vimiv.desktop
+image/svg+xml=vimiv.desktop
+audio/mpeg=mpv.desktop
+audio/ogg=mpv.desktop
+audio/flac=mpv.desktop
+audio/x-flac=mpv.desktop
+audio/wav=mpv.desktop
+audio/x-wav=mpv.desktop
+audio/aac=mpv.desktop
+audio/x-aac=mpv.desktop
+audio/m4a=mpv.desktop
+audio/x-m4a=mpv.desktop
+video/mp4=mpv.desktop
+video/x-matroska=mpv.desktop
+video/webm=mpv.desktop
+video/avi=mpv.desktop
+video/mpeg=mpv.desktop
+video/quicktime=mpv.desktop
+video/x-msvideo=mpv.desktop
 
 [Added Associations]
-image/png=swappy.desktop;
+image/png=vimiv.desktop;swappy.desktop;

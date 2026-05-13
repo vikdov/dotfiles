@@ -23,13 +23,13 @@ if [[ -z "$FILE" ]]; then
 fi
 
 # Start daemon if not running
-pgrep -x swww-daemon >/dev/null || swww-daemon &
+pgrep -x awww-daemon >/dev/null || awww-daemon &
 
 # Small delay to ensure socket is ready
 sleep 0.3
 
 echo "Setting wallpaper: $(basename "$FILE")"
-swww img "$FILE" \
+awww img "$FILE" \
   --transition-type fade \
   --transition-duration 1 \
   --transition-fps 60 \

@@ -54,6 +54,7 @@
 @define-color mantle-rgb rgb(41, 44, 60);
 @define-color crust #232634;
 @define-color crust-rgb rgb(35, 38, 52);
+@define-color arch-blue #1793D1;
 
 /* ───── Global Styles (style-power.css overrides) ───── */
 * {
@@ -68,7 +69,7 @@
 window {
   margin: 0px;
   padding: 12px 12px 16px;
-  border: 2px solid @lavender;
+  border: 2px solid @arch-blue;
   border-radius: 8px;
   background-color: @base;
   animation: none;
@@ -90,23 +91,18 @@ window {
 
 /* ───── Input (style-power.css overrides) ───── */
 #input {
- margin:1px 1px 12px;
+  margin: 1px 1px 12px;
   padding: 10px 12px;
   border: none;
   border-radius: 6px;
   color: @text;
   background-color: @mantle;
   font-size: 15px;
-
 }
 
 #input image {
   border: none;
   color: @red;
-}
-
-#input * {
-  outline: 4px solid @red !important;
 }
 
 
@@ -131,7 +127,7 @@ window {
 
 #entry arrow {
   border: none;
-  color: @lavender;
+  color: @arch-blue;
 }
 
 #entry:hover {
@@ -140,7 +136,7 @@ window {
 
 /* ───── Selected Entry (style-power.css overrides) ───── */
 #entry:selected {
-  background-color: @mauve;
+  background-color: @arch-blue;
 
 }
 

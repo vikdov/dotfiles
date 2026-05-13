@@ -5,7 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ -f "/opt/homebrew/bin/brew" ]] then
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
   # If you're using macOS, you'll want this enabled
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
@@ -93,16 +93,34 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls='ls --color'
+alias rm='trash-put'
 alias n='nvim'
 alias c='clear'
-alias y='yazi'
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 alias ls='ls --color=auto --hyperlink=auto'
 alias lg='lazygit'
+alias grep='rg'
+
+# Path updates
+export PATH="$HOME/.spicetify:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
 
 # Shell integrations
 eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
 eval "$(dircolors -b)"
+
+# McFly should usually come BEFORE zoxide if both touch the prompt/cd
+eval "$(mcfly init zsh)"
+export MCFLY_PROMPT="❯"
+
+eval "$(zoxide init zsh --cmd cd)"
 
 export PATH=$PATH:/home/viktor/.spicetify
