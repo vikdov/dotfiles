@@ -2,15 +2,15 @@
 # Prevent multiple instances
 pgrep -x wofi && pkill -x wofi && exit 0
 
-declare -A actions=(
-  ["󰍁 Lock"]="~/.config/hypr/scripts/lock-screen.sh"
-  ["󰍃 Logout"]="hyprctl dispatch exit"
-  ["󰜉 Reboot"]="systemctl reboot"
-  ["󰤆 Shutdown"]="systemctl poweroff"
+options=(
+  "󰍁 Lock"
+  "󰍃 Logout"
+  "󰜉 Reboot"
+  "󰤆 Shutdown"
 )
 
 choice=$(
-  printf "%s\n" "${!actions[@]}" | wofi \
+  printf "%s\n" "${options[@]}" | wofi \
     --show dmenu \
     --prompt "Power" \
     --width 420 \
@@ -25,4 +25,10 @@ choice=$(
 )
 
 [[ -z "$choice" ]] && exit 0
-eval ${actions[$choice]} &>/dev/null
+
+case "$choice" in
+  "󰍁 Lock")     ~/.config/hypr/scripts/lock-screen.sh ;;
+  "󰍃 Logout")   loginctl terminate-session "$XDG_SESSION_ID" ;;
+  "󰜉 Reboot")   systemctl reboot ;;
+  "󰤆 Shutdown") systemctl poweroff ;;
+esac

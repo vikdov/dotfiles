@@ -131,7 +131,10 @@ fi
 
 # 8. Check for broken symlinks
 print_header "8. Checking for Broken Symlinks"
-broken_links=$(find /home /etc /usr /opt -xtype l 2>/dev/null | wc -l)
+broken_links=$(find /home /etc /usr /opt -xtype l 2>/dev/null \
+  | grep -v "/.cache/" \
+  | grep -v "/mozilla/firefox" \
+  | wc -l)
 if [ "$broken_links" -eq 0 ]; then
   print_success "No broken symlinks found"
 else
