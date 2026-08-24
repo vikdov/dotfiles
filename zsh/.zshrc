@@ -121,6 +121,11 @@ eval "$(dircolors -b)"
 eval "$(mcfly init zsh)"
 export MCFLY_PROMPT="❯"
 
-eval "$(zoxide init zsh --cmd cd)"
-
 export PATH=$PATH:/home/viktor/.spicetify
+
+export _ZO_DOCTOR=0   # suppress zoxide doctor warning; must be set before init
+eval "$(zoxide init zsh --cmd cd)"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+# _ZO_DOCTOR set above zoxide init (must precede it to take effect)
