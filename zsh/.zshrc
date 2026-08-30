@@ -108,6 +108,8 @@ alias ls='ls --color=auto --hyperlink=auto'
 alias lg='lazygit'
 alias grep='rg'
 
+export EDITOR="nvim"
+
 # Path updates
 export PATH="$HOME/.spicetify:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
